@@ -59,3 +59,32 @@ clearHistoryBtn.onclick = function () {
     callHistoryEl.innerHTML = '';
 };
 
+
+    // Copy count
+    var copyCount = 0;
+    var copyCountEl = document.getElementById('copyCount');
+
+    // Get all copy buttons
+    var copyButtons = document.getElementsByClassName('copy-btn');
+
+    for (var i = 0; i < copyButtons.length; i++) {
+        copyButtons[i].onclick = function() {
+            var number = this.getAttribute('data-number');
+
+            
+            var tempInput = document.createElement('input');
+            tempInput.value = number;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            // Increase copy count
+            copyCount = copyCount + 1;
+            copyCountEl.textContent = copyCount;
+
+            // Alert
+            alert("Copied number: " + number);
+        };
+    }
+
